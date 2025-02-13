@@ -1,0 +1,68 @@
+# UML diagram PlaneManagement
+
+{
+"classes": [
+    {
+      "name": "Flight",
+      "access": "public",
+      "attributes": [
+        {"name": "flightNumber", "type": "String"},
+        {"name": "plane", "type": "Plane"},
+        {"name": "airline", "type": "String"},
+        {"name": "originAirport", "type": "Airport"},
+        {"name": "arrivalAirport", "type": "Airport"},       
+        {"name": "departureTime", "type": "LocalDateTime"},
+        {"name": "arrivalTime", "type": "LocalDateTime"},
+        {"name": "duration", "type": "int"},
+        {"name": "status", "type": "String"}
+      ]
+    },
+    {
+      "name": "Plane",
+      "access": "public",
+      "attributes": [
+        {"name": "id", "type": "String"},
+        {"name": "model", "type": "String"},
+        {"name": "airline", "type": "String"},
+        {"name": "manufacturer", "type": "String"},
+        {"name": "capacity", "type": "int"},
+        {"name": "range", "type": "double"},
+        {"name": "cruiseSpeed", "type": "double"},
+        {"name": "isFlying", "type": "boolean"},
+        {"name": "currentFlight", "type": "currentFlight"}
+      ]
+    },
+    {
+      "name": "Airport",
+      "access": "public",
+      "attributes": [
+        {"name": "airName", "type": "String"},
+        {"name": "airportCode", "type": "String"},
+        {"name": "airCity", "type": "String"},
+        {"name": "airCountry", "type": "String"},
+        {"name": "planes", "type": "ArrayList<Plane>"},
+        {"name": "numberOfRunways", "type": "int"}
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "source": "Flight",
+      "target": "Plane",
+      "type": "association",
+      "label": "plane"
+    },
+    {
+      "source": "Flight",
+      "target": "Airport",
+      "type": "association",
+      "label": "originAirport"
+    },
+        {
+      "source": "Flight",
+      "target": "Airport",
+      "type": "association",
+      "label": "arrivalAirport"
+    }
+  ]
+}
