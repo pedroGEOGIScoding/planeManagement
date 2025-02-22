@@ -2,10 +2,14 @@ package com.example.demo4.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Plane {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String model;
     private String airline;
     private String manufacturer;
@@ -13,30 +17,32 @@ public class Plane {
     private double range;
     private double cruiseSpeed;
     private boolean isFlying;
+    private String flightNumber;
 
-    @OneToOne (mappedBy = "flightNumber", cascade = CascadeType.ALL)
-    private Flight flightNumber;
 
+    @OneToOne(mappedBy = "plane2", cascade = CascadeType.ALL)
+    private Flight flight;
+
+    //CONSTRUCTORS
     public Plane () {
     }
 
-    public Plane(boolean isFlying, Flight flightNumber, double cruiseSpeed, double range, int capacity, String manufacturer, String airline, String model, String id) {
+    public Plane(boolean isFlying, double cruiseSpeed, double range, int capacity, String manufacturer, String airline, String model, String id) {
         this.isFlying = isFlying;
-        this.flightNumber = flightNumber;
         this.cruiseSpeed = cruiseSpeed;
         this.range = range;
         this.capacity = capacity;
         this.manufacturer = manufacturer;
         this.airline = airline;
         this.model = model;
-        this.id = id;
     }
 
-    public String getId() {
+    //GETTERS & SETTERS
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -88,20 +94,20 @@ public class Plane {
         this.cruiseSpeed = cruiseSpeed;
     }
 
-    public Flight getFlightNumber() {
-        return flightNumber;
-    }
-
-    public void setFlightNumber(Flight flightNumber) {
-        this.flightNumber = flightNumber;
-    }
-
     public boolean isFlying() {
         return isFlying;
     }
 
     public void setFlying(boolean flying) {
         isFlying = flying;
+    }
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
     }
 
     @Override
@@ -114,9 +120,19 @@ public class Plane {
                 ", capacity=" + capacity +
                 ", range=" + range +
                 ", cruiseSpeed=" + cruiseSpeed +
-                ", currentFlightNumber=" + flightNumber +
                 ", isFlying=" + isFlying +
                 '}';
+    }
+
+    @OneToOne(mappedBy = "plane", optional = false)
+    private Flight flight2;
+
+    public Flight getFlight2() {
+        return flight2;
+    }
+
+    public void setFlight2(Flight flight2) {
+        this.flight2 = flight2;
     }
 }
 

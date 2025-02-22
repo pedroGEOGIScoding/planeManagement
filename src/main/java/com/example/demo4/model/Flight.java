@@ -1,47 +1,37 @@
 package com.example.demo4.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jdk.jfr.DataAmount;
-
-import java.util.List;
+import jakarta.persistence.*;
 
 @Entity
-@DataAmount
 public class Flight {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="plane_id", referencedColumnName = "id")
+    public Plane plane;
+
     private String flightNumber;
     private String airline;
     private int flightDuration;
     private String flightStatus;
     private boolean isFlying;
 
-    @ManyToMany (mappedBy = "flightNumber")
-    private List <Airport> originAirport;
-    @ManyToMany (mappedBy = "flightNumber")
-    private List <Airport> arrivalAirport;
 
+    //CONSTRUCTORS
     public Flight() {
     }
 
     public Flight(String flightNumber, String airline, int flightDuration, String flightStatus, boolean isFlying) {
-        this.flightNumber = flightNumber;
         this.airline = airline;
         this.flightDuration = flightDuration;
         this.flightStatus = flightStatus;
         this.isFlying = isFlying;
     }
 
-    public String getFlightNumber() {
-        return flightNumber;
-    }
-
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
-    }
+    //GETTERS & SETTERS
 
     public String getAirline() {
         return airline;
@@ -75,21 +65,7 @@ public class Flight {
         isFlying = flying;
     }
 
-    public List<Airport> getOriginAirport() {
-        return originAirport;
-    }
 
-    public void setOriginAirport(List<Airport> originAirport) {
-        this.originAirport = originAirport;
-    }
-
-    public List<Airport> getArrivalAirport() {
-        return arrivalAirport;
-    }
-
-    public void setArrivalAirport(List<Airport> arrivalAirport) {
-        this.arrivalAirport = arrivalAirport;
-    }
 
     @Override
     public String toString() {
@@ -100,5 +76,16 @@ public class Flight {
                 ", airline='" + airline + '\'' +
                 ", flightNumber='" + flightNumber + '\'' +
                 '}';
+    }
+
+    @OneToOne(optional = false)
+    private Plane plane2;
+
+    public Plane getPlane2() {
+        return plane2;
+    }
+
+    public void setPlane2(Plane plane2) {
+        this.plane2 = plane2;
     }
 }
