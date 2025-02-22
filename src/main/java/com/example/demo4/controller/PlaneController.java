@@ -11,9 +11,9 @@ import java.util.List;
 public class PlaneController {
     @Autowired
     PlaneRepository planeRepository;
-    @GetMapping("/planes4")
-    public List<Plane> getAllPlanes() {
 
+    @GetMapping("/planes")
+    public List<Plane> getAllPlanes() {
         List<Plane> planes = planeRepository.findAll();
         System.out.println(planes);
         return planes;

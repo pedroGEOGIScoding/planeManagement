@@ -1,7 +1,6 @@
 package com.example.demo4.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Plane {
@@ -13,15 +12,17 @@ public class Plane {
     private int capacity;
     private double range;
     private double cruiseSpeed;
-    private double currentFlight;
     private boolean isFlying;
+
+    @OneToOne (mappedBy = "flightNumber", cascade = CascadeType.ALL)
+    private Flight flightNumber;
 
     public Plane () {
     }
 
-    public Plane(boolean isFlying, double currentFlight, double cruiseSpeed, double range, int capacity, String manufacturer, String airline, String model, String id) {
+    public Plane(boolean isFlying, Flight flightNumber, double cruiseSpeed, double range, int capacity, String manufacturer, String airline, String model, String id) {
         this.isFlying = isFlying;
-        this.currentFlight = currentFlight;
+        this.flightNumber = flightNumber;
         this.cruiseSpeed = cruiseSpeed;
         this.range = range;
         this.capacity = capacity;
@@ -87,12 +88,12 @@ public class Plane {
         this.cruiseSpeed = cruiseSpeed;
     }
 
-    public double getCurrentFlight() {
-        return currentFlight;
+    public Flight getFlightNumber() {
+        return flightNumber;
     }
 
-    public void setCurrentFlight(double currentFlight) {
-        this.currentFlight = currentFlight;
+    public void setFlightNumber(Flight flightNumber) {
+        this.flightNumber = flightNumber;
     }
 
     public boolean isFlying() {
@@ -101,6 +102,21 @@ public class Plane {
 
     public void setFlying(boolean flying) {
         isFlying = flying;
+    }
+
+    @Override
+    public String toString() {
+        return "Plane{" +
+                "id='" + id + '\'' +
+                ", model='" + model + '\'' +
+                ", airline='" + airline + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", capacity=" + capacity +
+                ", range=" + range +
+                ", cruiseSpeed=" + cruiseSpeed +
+                ", currentFlightNumber=" + flightNumber +
+                ", isFlying=" + isFlying +
+                '}';
     }
 }
 
