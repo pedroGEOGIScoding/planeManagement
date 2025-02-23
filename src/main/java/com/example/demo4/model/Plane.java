@@ -25,9 +25,6 @@ public class Plane {
     private boolean isFlying;
     private String flightNumber;
 
-    @OneToOne
-    @JoinColumn
-    public Flight flight;
 
 
 }

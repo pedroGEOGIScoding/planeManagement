@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/planes")
+//@RequestMapping("/api/planes")
 public class PlaneController {
     @Autowired
     public PlaneRepository planeRepository;
