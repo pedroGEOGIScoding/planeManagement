@@ -13,15 +13,17 @@ public class Flight {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @OneToOne(mappedBy = "flight")
-    public Plane plane;
+    private String id;
 
     private String flightNumber;
     private String airline;
     private int flightDuration;
     private String flightStatus;
     private boolean isFlying;
+
+    @OneToOne(mappedBy = "flight", cascade = CascadeType.ALL)
+    public Plane plane;
+
+
 
 }

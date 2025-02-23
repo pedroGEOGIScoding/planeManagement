@@ -1,6 +1,5 @@
 package com.example.demo4.service;
 
-import com.example.demo4.model.Flight;
 import com.example.demo4.model.Plane;
 import com.example.demo4.repository.PlaneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class PlaneService {
 
     public List<Plane> getAllPlanes() {
         return planeRepository.findAll();
-    };
+    }
 
     public Optional<Plane> getPlaneById(String id) {
         return planeRepository.findById(id);
