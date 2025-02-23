@@ -2,7 +2,7 @@ package com.example.demo4.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UuidGenerator;
 
 @Entity
 @Data
@@ -14,8 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 public class Plane {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @UuidGenerator
     private String id;
 
     private String model;
@@ -26,8 +25,10 @@ public class Plane {
     private double cruiseSpeed;
     private boolean isFlying;
 
-    @OneToOne (mappedBy = "flightNumber", cascade = CascadeType.ALL)
-    private Flight flightNumber;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private Flight flight;
+
 
 
 }

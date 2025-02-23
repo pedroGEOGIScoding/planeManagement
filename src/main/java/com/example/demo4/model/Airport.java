@@ -1,13 +1,12 @@
 package com.example.demo4.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UuidGenerator;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 @Entity
@@ -21,8 +20,7 @@ import java.util.List;
 public class Airport {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @UuidGenerator
     private String id;
 
     private String airportName;
@@ -30,8 +28,7 @@ public class Airport {
     private String airportCity;
     private String airportCountry;
     private int numberOfRunways;
-
-    @OneToMany (mappedBy = "airportCode")
-    private List<Plane> planes;
+    @ManyToMany
+    private ArrayList<Plane> planes;
 
 }
