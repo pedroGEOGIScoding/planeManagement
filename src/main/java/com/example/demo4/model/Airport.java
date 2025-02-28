@@ -28,7 +28,7 @@ public class Airport {
     private String airportCity;
     private String airportCountry;
     private int numberOfRunways;
-    @ManyToMany
+    @ManyToMany //Esta JPA relation me genera la tabla AIRPORT_PLANES with the foreign keys
     private ArrayList<Plane> planes;
 
 }
