@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -25,9 +28,8 @@ public class Plane {
     private double cruiseSpeed;
     private boolean isFlying;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private Flight flight;
+    @ManyToMany(mappedBy = "planes", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Flight> flights = new ArrayList<>();
 
 
 

@@ -1,12 +1,13 @@
 package com.example.demo4.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -28,7 +29,11 @@ public class Airport {
     private String airportCity;
     private String airportCountry;
     private int numberOfRunways;
-    @ManyToMany //Esta JPA relation me genera la tabla AIRPORT_PLANES with the foreign keys
-    private ArrayList<Plane> planes;
 
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "AIRPORT_FLIGHT_JOIN_TABLE",
+            joinColumns =  { @JoinColumn(name = "AIRPORT_FK") },
+            inverseJoinColumns = { @JoinColumn(name = "FLIGHT_FK") })
+    private List<Flight> flights = new ArrayList<>();
 }
