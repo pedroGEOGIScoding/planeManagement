@@ -28,7 +28,10 @@ public class Airport {
     private String airportCode;
     private String airportCity;
     private String airportCountry;
-    private int numberOfRunways;
+    private float airportLatitude;
+    private float airportLongitude;
+    private int airportElevation;
+    private String runwayName;
 
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
