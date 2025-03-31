@@ -31,7 +31,10 @@ public class Airport {
     private float airportLatitude;
     private float airportLongitude;
     private int airportElevation;
-    private String runwayName;
+
+    @OneToMany(mappedBy = "airportCode", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Runway> runways = new ArrayList<>();
+
 
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
