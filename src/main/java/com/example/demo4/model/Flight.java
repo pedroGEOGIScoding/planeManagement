@@ -27,8 +27,9 @@ public class Flight {
     private String flightNumber;
     private String airline;
     private int flightDuration;
-    private String flightStatus;
     private boolean isFlying;
+    private String arrivalAirport;
+    private String originAirport;
 
     @ManyToMany(mappedBy = "flights")
     private List<Airport> airports = new ArrayList<>();
