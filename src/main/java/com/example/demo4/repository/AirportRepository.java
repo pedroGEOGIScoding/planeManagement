@@ -8,10 +8,7 @@ import java.util.List;
 
 @Repository
 public interface AirportRepository extends JpaRepository<Airport, String> {
+    List<Airport> findByAirportCodeContaining(String airportCodeKeyword);
 
-    List<Airport> findByAirportCity(String airportCity);
-    List<Airport> findByAirportCountry(String airportCountry);
-    List<Airport> findByAirportName(String airportName);
-
-
+    List<Airport> findByAirportNameContaining(String airportNameKeyword);
 }
