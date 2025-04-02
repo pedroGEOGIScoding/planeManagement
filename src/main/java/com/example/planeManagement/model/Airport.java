@@ -1,9 +1,8 @@
-package com.example.demo4.model;
+package com.example.planeManagement.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package com.example.demo4.controller;
-import com.example.demo4.model.Plane;
-import com.example.demo4.repository.PlaneRepository;
+package com.example.planeManagement.controller;
+import com.example.planeManagement.model.Plane;
+import com.example.planeManagement.repository.PlaneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

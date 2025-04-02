@@ -1,6 +1,6 @@
-package com.example.demo4.repository;
+package com.example.planeManagement.repository;
 
-import com.example.demo4.model.Plane;
+import com.example.planeManagement.model.Plane;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

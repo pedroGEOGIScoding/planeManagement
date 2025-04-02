@@ -1,10 +1,10 @@
-package com.example.demo4;
+package com.example.planeManagement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Demo4ApplicationTests {
+class PlaneManagementApplicationTests {
 
 	@Test
 	void contextLoads() {
