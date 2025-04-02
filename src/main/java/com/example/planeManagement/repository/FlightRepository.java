@@ -11,6 +11,7 @@ import java.util.List;
 public interface FlightRepository extends JpaRepository<Flight, String> {
 
     List<Flight> findByFlightNumber(String flightNumber);
+
     List<Flight> findByAirline(String airline);
 
     List<Flight> findAll(Specification<Flight> flightSpecification);
