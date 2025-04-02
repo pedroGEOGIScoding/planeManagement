@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface RunwayRepository extends JpaRepository<Runway, String> {
     List<Runway> findByAirportCode(Airport airportCode);
+
+    List<Runway> findByRunwayName(String runwayName);
 }

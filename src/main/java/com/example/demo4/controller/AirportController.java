@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/plane")
+@RequestMapping("/api/v1/planes")
 //@CrossOrigin(origins = "http://localhost:5173")
 @CrossOrigin(origins = "*")
 

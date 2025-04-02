@@ -7,6 +7,8 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jakarta.persistence.CascadeType.*;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -28,10 +30,15 @@ public class Plane {
     private double cruiseSpeed;
     private boolean isFlying;
 
-    @ManyToMany(mappedBy = "planes", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "planes", cascade = {PERSIST, MERGE, DETACH}, fetch = FetchType.EAGER)
     private List<Flight> flights = new ArrayList<>();
 
 
+    public Object getIsFlying() {
+        return null;
+    }
 
+    public void setIsFlying(Object isFlying) {
+    }
 }
 
