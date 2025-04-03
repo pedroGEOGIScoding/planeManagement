@@ -38,6 +38,7 @@ public class AirportController {
     }
 
     @PutMapping("/{id}")
+    //airportDetails es una variable de referencia que se crea dentro de @RequestBody
     public ResponseEntity<Airport> updateAirport(@PathVariable String id, @RequestBody Airport airportDetails) {
         Optional<Airport> optionalAirport = airportRepository.findById(id);
         if (optionalAirport.isPresent()) {
