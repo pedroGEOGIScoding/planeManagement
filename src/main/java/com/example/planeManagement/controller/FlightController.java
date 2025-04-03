@@ -85,17 +85,6 @@ public class FlightController {
         return ResponseEntity.ok(flights);
     }
 
-    @GetMapping("/airports/{id}")
-    public ResponseEntity<List<Flight>> getFlightsByArrivalAirport(@PathVariable String id) {
-        List<Flight> flights = flightRepository.findByArrivalAirport(id);
-        return ResponseEntity.ok(flights);
-    }
-
-    @GetMapping("/airports/{id}")
-    public ResponseEntity<List<Flight>> getFlightsByOriginAirport(@PathVariable String id) {
-        List<Flight> flights = flightRepository.findByOriginAirport(id);
-        return ResponseEntity.ok(flights);
-    }
 }
 
 

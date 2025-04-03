@@ -1,6 +1,7 @@
 package com.example.planeManagement.repository;
 
 import com.example.planeManagement.model.Flight;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
