@@ -10,7 +10,6 @@ public class FlightSpecification {
 
     public static Specification<Flight> filterByParams(
             String flightNumber,
-            String airline,
             String arrivalAirport,
             String originAirport
     ) {

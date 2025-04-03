@@ -24,11 +24,10 @@ public class FlightController {
     @GetMapping
     public ResponseEntity<List<Flight>> filterFlights(
             @RequestParam(required = false) String flightNumber,
-            @RequestParam(required = false) String airline,
             @RequestParam(required = false) String arrivalAirport,
             @RequestParam(required = false) String originAirport
     ) {
-        Specification<Flight> flightSpecification = FlightSpecification.filterByParams(flightNumber, airline, arrivalAirport, originAirport);
+        Specification<Flight> flightSpecification = FlightSpecification.filterByParams(flightNumber, arrivalAirport, originAirport);
         List<Flight> flights = flightRepository.findAll(flightSpecification);
         return ResponseEntity.ok(flights);
         }
