@@ -13,8 +13,4 @@ public interface FlightRepository extends JpaRepository<Flight, String>, JpaSpec
     List<Flight> findByFlightNumber(String flightNumber);
 
     List<Flight> findByAirline(String airline);
-
-    List<Flight> findByArrivalAirport(String arrivalAirport);
-
-    List<Flight> findByOriginAirport(String originAirport);
 }

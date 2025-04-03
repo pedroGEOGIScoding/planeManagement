@@ -4,7 +4,6 @@ import com.example.planeManagement.model.Flight;
 import com.example.planeManagement.repository.FlightRepository;
 import com.example.planeManagement.repository.FlightSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +27,7 @@ public class FlightController {
             @RequestParam(required = false) String arrivalAirport,
             @RequestParam(required = false) String originAirport
     ) {
-        Specification<Flight> flightSpecification = FlightSpecification.filterByParams(flightNumber, arrivalAirport, originAirport);
-        List<Flight> flights = flightRepository.findAll(flightSpecification);
+        List<Flight> flights = flightRepository.findAll(FlightSpecification.filterByParams(flightNumber, arrivalAirport, originAirport));
         return ResponseEntity.ok(flights);
         }
 
@@ -82,18 +80,6 @@ public class FlightController {
     @GetMapping("/airlines/{id}")
     public ResponseEntity<List<Flight>> getFlightsByAirline(@PathVariable String id) {
         List<Flight> flights = flightRepository.findByAirline(id);
-        return ResponseEntity.ok(flights);
-    }
-
-    @GetMapping("/airports/{id}")
-    public ResponseEntity<List<Flight>> getFlightsByArrivalAirport(@PathVariable String id) {
-        List<Flight> flights = flightRepository.findByArrivalAirport(id);
-        return ResponseEntity.ok(flights);
-    }
-
-    @GetMapping("/airports/{id}")
-    public ResponseEntity<List<Flight>> getFlightsByOriginAirport(@PathVariable String id) {
-        List<Flight> flights = flightRepository.findByOriginAirport(id);
         return ResponseEntity.ok(flights);
     }
 }
