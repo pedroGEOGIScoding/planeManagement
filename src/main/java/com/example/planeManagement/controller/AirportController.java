@@ -12,9 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/airports")
-//@CrossOrigin(origins = "http://localhost:5173")
-@CrossOrigin(origins = "*")
-
+@CrossOrigin(origins = "http://localhost:5173")
 
 public class AirportController {
     @Autowired
