@@ -31,8 +31,6 @@ public class Airport {
     private float airportLongitude;
     private int airportElevation;
 
-    @OneToMany(mappedBy = "airportCode", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Runway> runways = new ArrayList<>();
 
 
     @JsonIgnore

@@ -26,7 +26,7 @@ public class Flight {
 
     private String flightNumber;
     private String airline;
-    private int flightDuration;
+    private float flightDuration;
     private boolean isFlying;
     private String arrivalAirport;
     private String originAirport;
