@@ -3,7 +3,9 @@ package com.example.planeManagement.controller;
 import com.example.planeManagement.model.Flight;
 import com.example.planeManagement.repository.FlightRepository;
 import com.example.planeManagement.repository.FlightSpecification;
+import com.example.planeManagement.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,19 @@ public class FlightController {
 
     @Autowired
     private FlightRepository flightRepository;
+    private final FlightService flightService;
+
+    @Autowired
+    public FlightController(FlightService flightService) {
+        this.flightService = flightService;
+    }
+
+    @GetMapping("page/{pageNo}")
+    public Page<Flight> getFlightsPaginated(@PathVariable(value = "pageNo") int pageNo) {
+        final int PAGE_SIZE = 5;
+        return flightService.findPaginated(pageNo, PAGE_SIZE);
+    }
+
 
     @GetMapping
     public ResponseEntity<List<Flight>> filterFlights(
@@ -80,7 +95,7 @@ public class FlightController {
     @GetMapping("/airlines/{id}")
     public ResponseEntity<List<Flight>> getFlightsByAirline(@PathVariable String id) {
         List<Flight> flights = flightRepository.findByAirline(id);
-        return ResponseEntity.ok(flights);
+        return new ResponseEntity<>(flights, HttpStatus.OK);
     }
 }
 
