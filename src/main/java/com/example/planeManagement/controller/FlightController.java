@@ -5,6 +5,7 @@ import com.example.planeManagement.repository.FlightRepository;
 import com.example.planeManagement.repository.FlightSpecification;
 import com.example.planeManagement.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -77,19 +78,22 @@ public class FlightController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFlight(@PathVariable String id) {
-        if (flightRepository.existsById(id)) {
+    public ResponseEntity<?> deleteFlight(@PathVariable String id) {
+        try {
             flightRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (DataIntegrityViolationException e) {
+            String errorMessage = "Cannot delete flight because it is associated with a flight";
+            return new ResponseEntity<>(errorMessage, HttpStatus.CONFLICT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/airports/{id}")
     public ResponseEntity<List<Flight>> getFlightsByAirport(@PathVariable String id) {
         List<Flight> flights = flightRepository.findByFlightNumber(id);
-        return ResponseEntity.ok(flights);
+        return new ResponseEntity<>(flights, HttpStatus.OK);
     }
 
     @GetMapping("/airlines/{id}")
