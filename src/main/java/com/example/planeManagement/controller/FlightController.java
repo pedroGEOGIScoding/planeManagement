@@ -1,5 +1,4 @@
 package com.example.planeManagement.controller;
-
 import com.example.planeManagement.model.Flight;
 import com.example.planeManagement.repository.FlightRepository;
 import com.example.planeManagement.repository.FlightSpecification;
@@ -35,7 +34,6 @@ public class FlightController {
         final int PAGE_SIZE = 5;
         return flightService.findPaginated(pageNo, PAGE_SIZE);
     }
-
 
     @GetMapping
     public ResponseEntity<List<Flight>> filterFlights(

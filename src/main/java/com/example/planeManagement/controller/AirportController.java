@@ -1,8 +1,10 @@
 package com.example.planeManagement.controller;
 import com.example.planeManagement.model.Airport;
 import com.example.planeManagement.repository.AirportRepository;
+import com.example.planeManagement.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,18 @@ import java.util.Optional;
 public class AirportController {
     @Autowired
     private AirportRepository airportRepository;
+    private final AirportService airportService;
+
+    @Autowired
+    public AirportController(AirportService airportService) {
+        this.airportService = airportService;
+    }
+
+    @GetMapping("page/{pageNo}")
+    public Page<Airport> getAirportsPaginated(@PathVariable(value = "pageNo") int pageNo) {
+        final int PAGE_SIZE = 5;
+        return airportService.findPaginated(pageNo, PAGE_SIZE);
+    }
 
     @GetMapping
     public ResponseEntity<List<Airport>> getAllAirports() {
