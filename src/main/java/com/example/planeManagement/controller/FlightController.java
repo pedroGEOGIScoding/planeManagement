@@ -6,6 +6,7 @@ import com.example.planeManagement.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +30,18 @@ public class FlightController {
         this.flightService = flightService;
     }
 
+    @GetMapping("/flights")
+    public  Page<Flight> flightPageable(Pageable pageable) {
+        return flightRepository.findAll(pageable);
+    }
+
     @GetMapping("page/{pageNo}")
     public Page<Flight> getFlightsPaginated(@PathVariable(value = "pageNo") int pageNo) {
         final int PAGE_SIZE = 5;
         return flightService.findPaginated(pageNo, PAGE_SIZE);
     }
 
-    @GetMapping
+    @GetMapping("/flights/filter")
     public ResponseEntity<List<Flight>> filterFlights(
             @RequestParam(required = false) String flightNumber,
             @RequestParam(required = false) String arrivalAirport,

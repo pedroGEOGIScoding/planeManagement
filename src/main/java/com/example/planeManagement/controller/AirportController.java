@@ -5,6 +5,7 @@ import com.example.planeManagement.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,11 @@ public class AirportController {
     @Autowired
     public AirportController(AirportService airportService) {
         this.airportService = airportService;
+    }
+    //CRUD: read items. In this case airports
+    @GetMapping("/airports")
+    public Page<Airport> airportPageable(Pageable pageable) {
+        return airportRepository.findAll(pageable);
     }
 
     @GetMapping("page/{pageNo}")
