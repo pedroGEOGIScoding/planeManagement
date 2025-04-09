@@ -5,7 +5,6 @@ import com.example.planeManagement.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,22 +26,17 @@ public class AirportController {
     public AirportController(AirportService airportService) {
         this.airportService = airportService;
     }
-    //CRUD: read items. In this case airports
-    @GetMapping("/airports")
-    public Page<Airport> airportPageable(Pageable pageable) {
-        return airportRepository.findAll(pageable);
-    }
-
-    @GetMapping("page/{pageNo}")
-    public Page<Airport> getAirportsPaginated(@PathVariable(value = "pageNo") int pageNo) {
-        final int PAGE_SIZE = 5;
-        return airportService.findPaginated(pageNo, PAGE_SIZE);
-    }
 
     @GetMapping
     public ResponseEntity<List<Airport>> getAllAirports() {
         List<Airport> airports = airportRepository.findAll();
         return new ResponseEntity<>(airports, HttpStatus.OK);
+    }
+
+    @GetMapping("/page/{pageNo}")
+    public Page<Airport> getAirportsPaginated(@PathVariable int pageNo) {
+        final int PAGE_SIZE = 5;
+        return airportService.findPaginated(pageNo, PAGE_SIZE);
     }
 
    @GetMapping("/{id}")

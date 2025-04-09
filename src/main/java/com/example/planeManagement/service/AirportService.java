@@ -15,7 +15,7 @@ public class AirportService {
 	private AirportRepository airportRepository;
 
 	public Page<Airport> findPaginated(int pageNo, int pageSize) {
-		if (pageNo < 1) throw new IllegalArgumentException("Invalid page number: " + pageNo);
+		if (pageNo < 1) throw new IllegalArgumentException();
 		// Cap page size at 100 to prevent excessive data retrieval
 		Pageable pageable = PageRequest.of(
 				pageNo - 1,
