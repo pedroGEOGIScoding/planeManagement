@@ -57,15 +57,17 @@ public class AirportController {
     public ResponseEntity<Airport> updateAirport(@PathVariable String id, @RequestBody Airport airportDetails) {
         Optional<Airport> optionalAirport = airportRepository.findById(id);
         if (optionalAirport.isPresent()) {
-            Airport airport = optionalAirport.get();
-            airport.setAirportName(airportDetails.getAirportName());
-            airport.setAirportCode(airportDetails.getAirportCode());
-            airport.setAirportCity(airportDetails.getAirportCity());
-            airport.setAirportCountry(airportDetails.getAirportCountry());
-            airport.setAirportLatitude(airportDetails.getAirportLatitude());
-            airport.setAirportLongitude(airportDetails.getAirportLongitude());
-            airport.setAirportElevation(airportDetails.getAirportElevation());
-            Airport updatedAirport = airportRepository.save(airport);
+
+            Airport existingairport = optionalAirport.get();
+            existingairport.setAirportName(airportDetails.getAirportName());
+            existingairport.setAirportCode(airportDetails.getAirportCode());
+            existingairport.setAirportCity(airportDetails.getAirportCity());
+            existingairport.setAirportCountry(airportDetails.getAirportCountry());
+            existingairport.setAirportLatitude(airportDetails.getAirportLatitude());
+            existingairport.setAirportLongitude(airportDetails.getAirportLongitude());
+            existingairport.setAirportElevation(airportDetails.getAirportElevation());
+
+            Airport updatedAirport = airportRepository.save(existingairport);
             return new ResponseEntity<>(updatedAirport, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
